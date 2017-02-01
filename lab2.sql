@@ -48,4 +48,4 @@ BEGIN
 END
 
 Execute sp_exmp_1;
-Execute sp_exmp_2P;
+Execute sp_exmp_2;

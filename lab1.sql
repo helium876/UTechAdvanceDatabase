@@ -83,3 +83,6 @@ BEGIN
 	WHERE Dob < '1951-01-01';
 
 END
+
+Execute sp_exmp_1;
+Execute sp_exmp_2;
