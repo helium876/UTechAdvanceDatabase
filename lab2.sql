@@ -1,51 +1,43 @@
 Use AD_LAB_1403095;
 
+GO
 
-GO 
-
-CREATE PROCEDURE sp_exmp_1
+CREATE PROCEDURE insert_records
+(
+	@ID INT,
+	@Name VARCHAR(255),
+	@Dob DATE,
+	@Gender CHAR(1),
+	@Parish VARCHAR(255),
+	@Mobile INT,
+	@Provider VARCHAR(255),
+)
 AS
 BEGIN
-
-	SELECT Provider, Count (*) AS Num_of_Cust
-	FROM Marketing_list
-	GROUP BY Provider
-
-	SELECT Count(Parish) AS Num_Males_StMary
-	FROM Marketing_list
-	WHERE Parish='ST. Mary' AND Gender='M';
-
-	DELETE FROM Marketing_list
-	WHERE Parish='ST. Mary' AND Gender='M';
+	
+	INSERT INTO Marketing_list(ID,Name,Dob,Gender,Parish,Mobile,Provider) 
+	VALUES(@ID,@Name,@Dob,@Gender,@Parish,@Mobile,@Provider)
+END
 
 
+CREATE PROCEDURE find_record
+(
+	@ID INT
+)
+AS 
+BEGIN
 	SELECT * FROM Marketing_list
-	WHERE Gender='M';
-
+		WHERE ID = @ID;
 END
 
 
-
-
-GO 
-
-CREATE PROCEDURE sp_exmp_2
-AS
+CREATE PROCEDURE update_record
+(
+	@ID INT,
+	@Name VARCHAR(255)
+)
+AS 
 BEGIN
-
-	SELECT COUNT(*) AS Num_of_Female_Cust FROM Marketing_list
-	WHERE Gender='F';
-
-	SELECT COUNT(*) AS Num_of_Male_Cust FROM Marketing_list
-	WHERE Gender='M';
-
-	SELECT Parish, COUNT(*) AS Num_of_Cust FROM Marketing_list
-	GROUP BY Parish;
-
-	DELETE FROM Marketing_list 
-	WHERE Dob < '1951-01-01';
-
+	UPDATE Marketing_list SET Name = @Name
+	WHERE ID = @ID
 END
-
-Execute sp_exmp_1;
-Execute sp_exmp_2;
